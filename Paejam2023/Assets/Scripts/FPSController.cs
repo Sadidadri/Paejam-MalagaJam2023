@@ -28,10 +28,10 @@ public class FPSController : MonoBehaviour
     private KeyCode crouchKey = KeyCode.LeftControl;
     //Crouch parameters
     private float crouchHeight = 0.5f;
-    private float standingHeight = 2f;
+    private float standingHeight;
     private float timeToCrouch = 0.25f;
-    private Vector3 crouchingCenter = new Vector3(0,0.5f,0);
-    private Vector3 standingCenter = new Vector3(0,0,0);
+    private Vector3 crouchingCenter;
+    private Vector3 standingCenter;
     private bool isCrouching;
     private bool duringCrouchAnimation;
 
@@ -40,6 +40,8 @@ public class FPSController : MonoBehaviour
     void Start()
     {
         controller = GetComponent<CharacterController>();
+        standingHeight = controller.height;
+        crouchingCenter = controller.center;
         
     }
 
@@ -53,7 +55,7 @@ public class FPSController : MonoBehaviour
         cam.transform.localEulerAngles = new Vector3(-v_mouse,0f,0f);
         transform.Rotate(0f,h_mouse,0f);
 
-        Debug.Log(Input.GetAxis("Mouse X"));
+    
 
         if (controller.isGrounded){
             move = new Vector3(Input.GetAxis("Horizontal"), 0f, Input.GetAxis("Vertical"));
