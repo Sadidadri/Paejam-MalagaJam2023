@@ -25,7 +25,7 @@ public class FPSController : MonoBehaviour
     private bool canCrouch = true;
 
 
-    private KeyCode crouch = KeyCode.LeftControl;
+    private KeyCode crouchKey = KeyCode.LeftControl;
     //Crouch parameters
     private float crouchHeight = 0.5f;
     private float standingHeight = 2f;
@@ -33,7 +33,7 @@ public class FPSController : MonoBehaviour
     private Vector3 crouchingCenter = new Vector3(0,0.5f,0);
     private Vector3 standingCenter = new Vector3(0,0,0);
     private bool isCrouching;
-    private bool duringCrouching;
+    private bool duringCrouchAnimation;
 
 
     // Start is called before the first frame update
@@ -84,7 +84,7 @@ public class FPSController : MonoBehaviour
 
     private void HandleCrouch(){
         if (ShouldCrouch){
-            StartCoroutine(CrouchStand())
+            StartCoroutine(CrouchStand());
         }
     }
 
@@ -108,8 +108,8 @@ public class FPSController : MonoBehaviour
         controller.height =  targetHeight;
         controller.center = targetCenter;
 
-        isCrouching = != isCrouching;
+        isCrouching = !isCrouching;
 
-         duringCrouchAnimation = false;
+        duringCrouchAnimation = false;
     }
 }
