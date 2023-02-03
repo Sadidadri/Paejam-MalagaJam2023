@@ -5,8 +5,12 @@ using UnityEngine;
 public class FPSController : MonoBehaviour
 {
 
-    private bool ShouldCrouch => Input.GetKeyDown(crouchKey) && !duringCrouchAnimation && controller.isGrounded;
+    private bool ShouldCrouch => Input.GetKey(crouchKey) && !duringCrouchAnimation && controller.isGrounded;
     CharacterController controller;
+
+    public GameObject txtInte;
+    public GameObject obj1;
+
 
 
     public float walkSpeed = 6f;
@@ -43,6 +47,7 @@ public class FPSController : MonoBehaviour
         standingHeight = controller.height;
         crouchingCenter = controller.center;
         standingCenter = crouchingCenter;
+        txtInte.SetActive(false);
         
     }
 
@@ -114,5 +119,26 @@ public class FPSController : MonoBehaviour
         isCrouching = !isCrouching;
 
         duringCrouchAnimation = false;
+    }
+
+    void OnTriggerEnter(Collider col){
+        if(col.gameObject.tag == "Evento1"){
+            txtInte.SetActive(true);
+        }
+    }
+
+    void OnTriggerExit(Collider col){
+        if(col.gameObject.tag == "Evento1"){
+            txtInte.SetActive(false);
+        }
+    }
+
+    void OnTriggerStay(Collider col){
+        if(col.gameObject.tag == "Evento1"){
+            if (Input.GetKey(KeyCode.E)){
+                Destroy(obj1);
+                txtInte.SetActive(false);
+            }
+        }
     }
 }
