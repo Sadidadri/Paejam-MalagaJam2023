@@ -42,6 +42,7 @@ public class FPSController : MonoBehaviour
         controller = GetComponent<CharacterController>();
         standingHeight = controller.height;
         crouchingCenter = controller.center;
+        standingCenter = crouchingCenter;
         
     }
 
