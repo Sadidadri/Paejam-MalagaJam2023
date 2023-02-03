@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class FPSController : MonoBehaviour
 {
+
+    private bool ShouldCrouch => Input.GetKeyDown(crouchKey) && !duringCrouchAnimation && controller.isGrounded;
     CharacterController controller;
 
 
@@ -20,6 +22,19 @@ public class FPSController : MonoBehaviour
     float h_mouse, v_mouse;
 
     private Vector3 move = Vector3.zero;
+    private bool canCrouch = true;
+
+
+    private KeyCode crouch = KeyCode.LeftControl;
+    //Crouch parameters
+    private float crouchHeight = 0.5f;
+    private float standingHeight = 2f;
+    private float timeToCrouch = 0.25f;
+    private Vector3 crouchingCenter = new Vector3(0,0.5f,0);
+    private Vector3 standingCenter = new Vector3(0,0,0);
+    private bool isCrouching;
+    private bool duringCrouching;
+
 
     // Start is called before the first frame update
     void Start()
@@ -59,5 +74,42 @@ public class FPSController : MonoBehaviour
         move.y -= gravity*Time.deltaTime;
 
         controller.Move(move*Time.deltaTime);
+
+        if (canCrouch){
+            HandleCrouch();
+        }
+        
+    }
+
+
+    private void HandleCrouch(){
+        if (ShouldCrouch){
+            StartCoroutine(CrouchStand())
+        }
+    }
+
+    private IEnumerator CrouchStand(){
+        duringCrouchAnimation = true;
+
+        float timeElapsed = 0;
+        float targetHeight = isCrouching ? standingHeight : crouchHeight;
+        float currentHeight = controller.height;
+
+        Vector3 targetCenter = isCrouching ? standingCenter : crouchingCenter;
+        Vector3 currentCenter = controller.center;
+
+        while(timeElapsed < timeToCrouch){
+            controller.height = Mathf.Lerp(currentHeight,targetHeight,timeElapsed/timeToCrouch);
+            controller.center = Vector3.Lerp(currentCenter,targetCenter,timeElapsed/timeToCrouch);
+            timeElapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        controller.height =  targetHeight;
+        controller.center = targetCenter;
+
+        isCrouching = != isCrouching;
+
+         duringCrouchAnimation = false;
     }
 }
