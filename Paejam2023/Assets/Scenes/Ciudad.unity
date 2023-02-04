@@ -794,6 +794,7 @@ MonoBehaviour:
   mouseVertical: 2
   minRotation: -65
   maxRotation: 60
+  timeDelayToCrouch: 0.6
   distanceToSee: 3
   vid1: {fileID: 1643073377}
 --- !u!1 &692236064
