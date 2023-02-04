@@ -5,6 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class ControlMenu : MonoBehaviour
 {
+    void Start(){
+        Cursor.visible = true;
+    }
     public void Nivel(){
         SceneManager.LoadScene("Ciudad");
     }
