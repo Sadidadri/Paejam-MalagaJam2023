@@ -44,7 +44,7 @@ public class FPSController : MonoBehaviour
     public float distanceToSee;
     RaycastHit whatIHit;
 
-    public GameObject vid1;
+    public GameObject vid1, vid2, vid3, vid4;
 
 
     // Start is called before the first frame update
@@ -57,7 +57,6 @@ public class FPSController : MonoBehaviour
         crouchingCenter = controller.center;
         standingCenter = crouchingCenter;
         txtInte.SetActive(false);
-        vid1.SetActive(false);
         
         
     }
@@ -77,8 +76,8 @@ public class FPSController : MonoBehaviour
                 if (Input.GetKey(KeyCode.E)){
                 Destroy(obj1);
                 txtInte.SetActive(false);
-                vid1.SetActive(true);
-                Invoke("desaparecerVideos",5);
+                vid3.SetActive(true);
+                Invoke("desaparecerVideos",4);
                 }
             }
         }
@@ -160,7 +159,14 @@ public class FPSController : MonoBehaviour
 
     void desaparecerVideos(){
         vid1.SetActive(false);
+        vid2.SetActive(false);
+        vid3.SetActive(false);
     }
+
+    void desaparecerVideos2(){
+        vid4.SetActive(false);
+    }
+
 
     // void OnTriggerEnter(Collider col){
     //     if(col.gameObject.tag == "Evento1"){
