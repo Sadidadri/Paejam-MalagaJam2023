@@ -188,6 +188,8 @@ public class FPSController : MonoBehaviour
             Time.timeScale = 1f;
         }
 
+        Cursor.visible = !Cursor.visible;
+
         isPaused = !isPaused;
         pauseMenu.SetActive(isPaused);
     }
