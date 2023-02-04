@@ -9,6 +9,19 @@ public class ControlMenu : MonoBehaviour
         SceneManager.LoadScene("Ciudad");
     }
 
+    public void Menu(){
+        SceneManager.LoadScene("Menu");
+    }
+
+    public void Controles(){
+        SceneManager.LoadScene("Controles");
+    }
+
+    public void Creditos(){
+        SceneManager.LoadScene("Creditos");
+    }
+
+
     public void Salir(){
         Application.Quit();
     }
