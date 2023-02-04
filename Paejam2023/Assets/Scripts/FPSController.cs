@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class FPSController : MonoBehaviour
 {
@@ -28,7 +29,7 @@ public class FPSController : MonoBehaviour
     private Vector3 move = Vector3.zero;
     private bool canCrouch = true;
 
-
+    
     private KeyCode crouchKey = KeyCode.LeftControl;
     //Crouch parameters
     private float crouchHeight = 0.5f;
@@ -43,8 +44,15 @@ public class FPSController : MonoBehaviour
     //RayCast
     public float distanceToSee;
     RaycastHit whatIHit;
+    
+
 
     public GameObject vid1, vid2, vid3, vid4;
+
+     //Pausa
+    private KeyCode escapeKey = KeyCode.Escape;
+    private bool isPaused = false;
+    public GameObject pauseMenu;
 
 
     // Start is called before the first frame update
@@ -64,6 +72,12 @@ public class FPSController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //pause handle
+         if (Input.GetKeyDown(escapeKey)){
+            handlePause();
+        }
+        
+
         timer += Time.deltaTime;
 
         txtInte.SetActive(false);
@@ -82,8 +96,8 @@ public class FPSController : MonoBehaviour
             }
         }
 
-        h_mouse = mouseHorizontal * Input.GetAxis("Mouse X");
-        v_mouse += mouseVertical * Input.GetAxis("Mouse Y");
+        h_mouse = isPaused ? 0 : mouseHorizontal * Input.GetAxis("Mouse X");
+        v_mouse = isPaused ? v_mouse : v_mouse + mouseVertical * Input.GetAxis("Mouse Y");
 
         v_mouse = Mathf.Clamp(v_mouse, minRotation, maxRotation);
         cam.transform.localEulerAngles = new Vector3(-v_mouse,0f,0f);
@@ -165,6 +179,22 @@ public class FPSController : MonoBehaviour
 
     void desaparecerVideos2(){
         vid4.SetActive(false);
+    }
+
+    public void handlePause(){
+        if (!isPaused){
+            Time.timeScale = 0f;
+        }else{
+            Time.timeScale = 1f;
+        }
+
+        isPaused = !isPaused;
+        pauseMenu.SetActive(isPaused);
+    }
+
+    public void Exit(){
+        handlePause();
+        SceneManager.LoadScene("Menu");
     }
 
 
