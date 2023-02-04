@@ -39,6 +39,10 @@ public class FPSController : MonoBehaviour
     private bool isCrouching;
     private bool duringCrouchAnimation;
 
+    //RayCast
+    public float distanceToSee;
+    RaycastHit whatIHit;
+
 
     // Start is called before the first frame update
     void Start()
@@ -55,6 +59,20 @@ public class FPSController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        txtInte.SetActive(false);
+        //Raycasting
+        Debug.DrawRay(cam.transform.position,cam.transform.forward * distanceToSee, Color.magenta);
+        if (Physics.Raycast(cam.transform.position,cam.transform.forward,out whatIHit,distanceToSee)){
+            //Debug.Log("I touched "+whatIHit.collider.gameObject.tag);
+            if (whatIHit.collider.gameObject.tag == "Evento1"){
+                txtInte.SetActive(true);
+                if (Input.GetKey(KeyCode.E)){
+                Destroy(obj1);
+                txtInte.SetActive(false);
+                }
+            }
+        }
+
         h_mouse = mouseHorizontal * Input.GetAxis("Mouse X");
         v_mouse += mouseVertical * Input.GetAxis("Mouse Y");
 
@@ -122,24 +140,24 @@ public class FPSController : MonoBehaviour
         duringCrouchAnimation = false;
     }
 
-    void OnTriggerEnter(Collider col){
-        if(col.gameObject.tag == "Evento1"){
-            txtInte.SetActive(true);
-        }
-    }
+    // void OnTriggerEnter(Collider col){
+    //     if(col.gameObject.tag == "Evento1"){
+    //         txtInte.SetActive(true);
+    //     }
+    // }
 
-    void OnTriggerExit(Collider col){
-        if(col.gameObject.tag == "Evento1"){
-            txtInte.SetActive(false);
-        }
-    }
+    // void OnTriggerExit(Collider col){
+    //     if(col.gameObject.tag == "Evento1"){
+    //         txtInte.SetActive(false);
+    //     }
+    // }
 
-    void OnTriggerStay(Collider col){
-        if(col.gameObject.tag == "Evento1"){
-            if (Input.GetKey(KeyCode.E)){
-                Destroy(obj1);
-                txtInte.SetActive(false);
-            }
-        }
-    }
+    // void OnTriggerStay(Collider col){
+    //     if(col.gameObject.tag == "Evento1"){
+    //         if (Input.GetKey(KeyCode.E)){
+    //             Destroy(obj1);
+    //             txtInte.SetActive(false);
+    //         }
+    //     }
+    // }
 }

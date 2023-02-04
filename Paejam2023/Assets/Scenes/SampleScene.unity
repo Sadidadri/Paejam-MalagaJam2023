@@ -347,7 +347,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Pulsa E para interactur
+  m_text: Pulsa E para interactuar
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -499,6 +499,7 @@ MonoBehaviour:
   mouseVertical: 2
   minRotation: -65
   maxRotation: 60
+  distanceToSee: 3
 --- !u!1 &692236064
 GameObject:
   m_ObjectHideFlags: 0
@@ -789,7 +790,7 @@ GameObject:
   - component: {fileID: 1340273756}
   - component: {fileID: 1340273757}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: ImportantObjectCollider
   m_TagString: Evento1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -821,7 +822,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1.9760904
+  m_Radius: 0.48
   m_Center: {x: 1.0158043, y: 0, z: 0}
 --- !u!1 &1425073289
 GameObject:
