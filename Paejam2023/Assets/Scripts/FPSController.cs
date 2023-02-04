@@ -38,7 +38,8 @@ public class FPSController : MonoBehaviour
     private Vector3 standingCenter;
     private bool isCrouching;
     private bool duringCrouchAnimation;
-
+    float timer;
+    public float timeDelayToCrouch = 0.6f;
     //RayCast
     public float distanceToSee;
     RaycastHit whatIHit;
@@ -47,6 +48,7 @@ public class FPSController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        timer = Time.time;
         Cursor.visible = false;
         controller = GetComponent<CharacterController>();
         standingHeight = controller.height;
@@ -59,6 +61,8 @@ public class FPSController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        timer += Time.deltaTime;
+
         txtInte.SetActive(false);
         //Raycasting
         Debug.DrawRay(cam.transform.position,cam.transform.forward * distanceToSee, Color.magenta);
@@ -85,11 +89,14 @@ public class FPSController : MonoBehaviour
         if (controller.isGrounded){
             move = new Vector3(Input.GetAxis("Horizontal"), 0f, Input.GetAxis("Vertical"));
 
+           
             if (Input.GetKey(KeyCode.LeftShift)){
-                 move = transform.TransformDirection(move)*runSpeed;
+                move = transform.TransformDirection(move)*runSpeed;
             } else {
                 move = transform.TransformDirection(move)*walkSpeed;
             }
+               
+         
 
             
             if (Input.GetKeyDown(KeyCode.Space)){
@@ -103,7 +110,9 @@ public class FPSController : MonoBehaviour
         controller.Move(move*Time.deltaTime);
 
         if (canCrouch){
+           
             HandleCrouch();
+            
         }
         
     }
@@ -111,7 +120,10 @@ public class FPSController : MonoBehaviour
 
     private void HandleCrouch(){
         if (ShouldCrouch){
-            StartCoroutine(CrouchStand());
+             if(timer >= timeDelayToCrouch){
+                StartCoroutine(CrouchStand());
+                timer = 0;
+             }
         }
     }
 

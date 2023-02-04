@@ -794,6 +794,7 @@ MonoBehaviour:
   mouseVertical: 2
   minRotation: -65
   maxRotation: 60
+  timeDelayToCrouch: 0.6
   distanceToSee: 3
 --- !u!1 &692236064
 GameObject:
