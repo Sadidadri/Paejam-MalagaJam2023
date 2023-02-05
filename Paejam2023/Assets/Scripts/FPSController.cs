@@ -46,6 +46,8 @@ public class FPSController : MonoBehaviour
     RaycastHit whatIHit;
     //TextoBuscaPistas
     public GameObject txtHints;
+
+     public GameObject Puerta;
     public Animator puertaAnim;
 
 
@@ -55,6 +57,10 @@ public class FPSController : MonoBehaviour
     private KeyCode escapeKey = KeyCode.Escape;
     private bool isPaused = false;
     public GameObject pauseMenu;
+
+    Vector3 posPuertaOriginal;
+
+    Vector3 posPuertaFinal;
 
     //Objetos coleccionables
     private bool keyObtained = true;
@@ -72,6 +78,7 @@ public class FPSController : MonoBehaviour
         txtInte.SetActive(false);
         txtHints.SetActive(true);
         Invoke("hideHintsTxt",4);
+        puertaAnim.Play("Puerta");
         
     }
 
@@ -96,7 +103,7 @@ public class FPSController : MonoBehaviour
                     txtInte.SetActive(true);
                      if (Input.GetKey(KeyCode.E)){
                         //Destroy(whatIHit.transform.gameObject);
-                        Debug.Log("Abrir")
+                        Debug.Log("Abrir");
                         puertaAnim.Play("AbrirPuerta");
                         txtInte.SetActive(false);
                      }
