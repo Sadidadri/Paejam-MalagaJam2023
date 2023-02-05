@@ -1869,8 +1869,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.012884731, y: 0.011376915, z: 0.07643147}
-  m_Center: {x: 0.0024525356, y: -0.0023714676, z: 0.037802577}
+  m_Size: {x: 0.006112424, y: 2.92968, z: 0.31139314}
+  m_Center: {x: -0.0009336407, y: -0.02216402, z: 0.15528353}
 --- !u!1001 &88581301
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17285,7 +17285,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 682956833}
   m_LocalRotation: {x: -0, y: -0.6761381, z: -0, w: 0.7367749}
-  m_LocalPosition: {x: -2.26, y: 0, z: 19.14}
+  m_LocalPosition: {x: 50.7, y: 0, z: 7.8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -17306,7 +17306,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   txtInte: {fileID: 585634045}
-  txtBuscaCandado: {fileID: 0}
+  txtBuscaCandado: {fileID: 1137652926}
   obj1: {fileID: 0}
   walkSpeed: 6
   runSpeed: 10
@@ -29197,7 +29197,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1137652927
 RectTransform:
   m_ObjectHideFlags: 0
