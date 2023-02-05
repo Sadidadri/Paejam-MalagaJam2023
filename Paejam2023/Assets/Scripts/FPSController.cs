@@ -9,6 +9,8 @@ public class FPSController : MonoBehaviour
     private bool ShouldCrouch => Input.GetKey(crouchKey) && !duringCrouchAnimation && controller.isGrounded;
     CharacterController controller;
 
+    AudioSource music;
+
     public GameObject txtInte;
     public GameObject txtBuscaCandado;
     public GameObject obj1;
@@ -88,6 +90,7 @@ public class FPSController : MonoBehaviour
         txtHints.SetActive(true);
         Invoke("hideHintsTxt",4);
         puertaAnim.Play("Puerta");
+        music = GetComponent<AudioSource>();
         
     }
 
@@ -167,20 +170,24 @@ public class FPSController : MonoBehaviour
                         break;
                     case "cigarro":
                         cigaretteObtained = true;
+                        music.volume = 0.15f;
                         vid1.SetActive(true);
                         Invoke("desaparecerVideos",4);
                         break;
-                    case "Coche_LP":  
+                    case "Coche_LP":
+                        music.volume = 0.15f;  
                         carObtained = true;
                         vid2.SetActive(true);
                         Invoke("desaparecerVideos",4);
                         break;
                     case "PERRO":
+                        music.volume = 0.15f;
                         dogObtained = true;
                         vid3.SetActive(true);
                         Invoke("desaparecerVideos",4);
                         break;
                     case "Badano":
+                        music.volume = 0.15f;
                         bananaObtained = true;
                         vid4.SetActive(true);
                         Invoke("desaparecerVideos2",9);
@@ -266,12 +273,14 @@ public class FPSController : MonoBehaviour
     }
 
     void desaparecerVideos(){
+        music.volume = 1f;
         vid1.SetActive(false);
         vid2.SetActive(false);
         vid3.SetActive(false);
     }
 
     void desaparecerVideos2(){
+        music.volume = 1f;
         vid4.SetActive(false);
     }
 
@@ -303,13 +312,14 @@ public class FPSController : MonoBehaviour
 
 
     private void LoadCasoResuelto(){
-        txtCasoResuelto.setActive(true);
+        txtCasoResuelto.SetActive(true);
         Invoke("LoadFinalVideo",3);
     }
 
     private void LoadFinalVideo(){
-        txtCasoResuelto.setActive(false);
-        videoFinal.setActive(true);
+        music.volume = 0.15f;
+        Destroy(txtCasoResuelto);
+        videoFinal.SetActive(true);
         Invoke("BackToMenu",33);
     }
     private void BackToMenu(){
