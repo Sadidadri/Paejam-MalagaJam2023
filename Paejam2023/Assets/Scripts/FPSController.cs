@@ -44,7 +44,8 @@ public class FPSController : MonoBehaviour
     //RayCast
     public float distanceToSee;
     RaycastHit whatIHit;
-    
+    //TextoBuscaPistas
+    public GameObject txtHints;
 
 
     public GameObject vid1, vid2, vid3, vid4;
@@ -65,7 +66,8 @@ public class FPSController : MonoBehaviour
         crouchingCenter = controller.center;
         standingCenter = crouchingCenter;
         txtInte.SetActive(false);
-        
+        txtHints.SetActive(true);
+        Invoke("hideHintsTxt",4);
         
     }
 
@@ -197,6 +199,10 @@ public class FPSController : MonoBehaviour
     public void Exit(){
         handlePause();
         SceneManager.LoadScene("Menu");
+    }
+
+    private void hideHintsTxt(){
+        txtHints.SetActive(false);
     }
 
 
