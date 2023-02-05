@@ -96,7 +96,7 @@ public class FPSController : MonoBehaviour
                     txtInte.SetActive(true);
                      if (Input.GetKey(KeyCode.E)){
                         //Destroy(whatIHit.transform.gameObject);
-                        Debug.Log("Abrir")
+                        Debug.Log("Abrir");
                         puertaAnim.Play("AbrirPuerta");
                         txtInte.SetActive(false);
                      }
