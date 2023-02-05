@@ -10,6 +10,7 @@ public class FPSController : MonoBehaviour
     CharacterController controller;
 
     public GameObject txtInte;
+    public GameObject txtBuscaCandado;
     public GameObject obj1;
 
 
@@ -65,6 +66,10 @@ public class FPSController : MonoBehaviour
 
     //Objetos coleccionables
     private bool keyObtained = false;
+    private bool cigaretteObtained = false;
+    private bool carObtained = false;
+    private bool dogObtained = false;
+    private bool bananaObtained = false;
 
 
     // Start is called before the first frame update
@@ -109,41 +114,68 @@ public class FPSController : MonoBehaviour
                         txtInte.SetActive(false);
                         doorOpened = true;
                      }
+                }else{
+                    txtBuscaCandado.SetActive(true);
+                    Invoke("hideBuscaCandado",4);
                 }
             }
 
             if (whatIHit.collider.gameObject.tag == "ObjectoSeleccionable"){             
-             txtInte.SetActive(true);
+              
+                 switch(whatIHit.transform.gameObject.name){
+                    case "llave":
+                        txtInte.SetActive(true);
+                        break;
+                    case "cigarro":
+                        if (!cigaretteObtained){
+                              txtInte.SetActive(true);
+                        }
+                        break;
+                    case "Coche_LP":  
+                        if (!carObtained){
+                              txtInte.SetActive(true);
+                        }
+                        break;
+                    case "PERRO":
+                        if (!dogObtained){
+                              txtInte.SetActive(true);
+                        }
+                        break;
+                    case "Badano":
+                        if (!bananaObtained){
+                              txtInte.SetActive(true);
+                        }
+                        break;
+                }
+
                 if (Input.GetKey(KeyCode.E)){
-                Destroy(whatIHit.transform.gameObject);
                 txtInte.SetActive(false);
                 switch(whatIHit.transform.gameObject.name){
                     case "llave":
+                        Destroy(whatIHit.transform.gameObject);
                         keyObtained = true;
                         break;
                     case "cigarro":
+                        cigaretteObtained = true;
                         vid1.SetActive(true);
                         Invoke("desaparecerVideos",4);
                         break;
-                    case "PERRO":
+                    case "Coche_LP":  
+                        carObtained = true;
                         vid2.SetActive(true);
                         Invoke("desaparecerVideos",4);
                         break;
-                    case "Coche_LP":  
+                    case "PERRO":
+                        dogObtained = true;
                         vid3.SetActive(true);
                         Invoke("desaparecerVideos",4);
                         break;
                     case "Badano":
+                        bananaObtained = true;
                         vid4.SetActive(true);
                         Invoke("desaparecerVideos2",9);
                         break;
-                }
-                //cigarrillo
-                //llave
-                //perro
-                //coche
-
-                
+                }                
                 }
          }
         }
@@ -255,6 +287,9 @@ public class FPSController : MonoBehaviour
         txtHints.SetActive(false);
     }
 
+    private void hideBuscaCandado(){
+        txtBuscaCandado.SetActive(false);
+    }
 
 
     // void OnTriggerEnter(Collider col){
