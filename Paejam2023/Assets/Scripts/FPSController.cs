@@ -50,6 +50,7 @@ public class FPSController : MonoBehaviour
      public GameObject Puerta;
     public Animator puertaAnim;
 
+    private bool doorOpened = false;
 
     public GameObject vid1, vid2, vid3, vid4;
 
@@ -63,7 +64,7 @@ public class FPSController : MonoBehaviour
     Vector3 posPuertaFinal;
 
     //Objetos coleccionables
-    private bool keyObtained = true;
+    private bool keyObtained = false;
 
 
     // Start is called before the first frame update
@@ -98,7 +99,7 @@ public class FPSController : MonoBehaviour
         Debug.DrawRay(cam.transform.position,cam.transform.forward * distanceToSee, Color.magenta);
         if (Physics.Raycast(cam.transform.position,cam.transform.forward,out whatIHit,distanceToSee)){
 
-            if( whatIHit.collider.gameObject.tag == "PuertaValla"){
+            if( whatIHit.collider.gameObject.tag == "PuertaValla" && !doorOpened){
                 if(keyObtained){
                     txtInte.SetActive(true);
                      if (Input.GetKey(KeyCode.E)){
@@ -106,6 +107,7 @@ public class FPSController : MonoBehaviour
                         Debug.Log("Abrir");
                         puertaAnim.Play("AbrirPuerta");
                         txtInte.SetActive(false);
+                        doorOpened = true;
                      }
                 }
             }
@@ -119,9 +121,29 @@ public class FPSController : MonoBehaviour
                     case "llave":
                         keyObtained = true;
                         break;
+                    case "cigarro":
+                        vid1.SetActive(true);
+                        Invoke("desaparecerVideos",4);
+                        break;
+                    case "PERRO":
+                        vid2.SetActive(true);
+                        Invoke("desaparecerVideos",4);
+                        break;
+                    case "Coche_LP":  
+                        vid3.SetActive(true);
+                        Invoke("desaparecerVideos",4);
+                        break;
+                    case "Badano":
+                        vid4.SetActive(true);
+                        Invoke("desaparecerVideos2",9);
+                        break;
                 }
-                //vid3.SetActive(true);
-                //Invoke("desaparecerVideos",4);
+                //cigarrillo
+                //llave
+                //perro
+                //coche
+
+                
                 }
          }
         }
