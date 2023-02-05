@@ -96,7 +96,7 @@ public class FPSController : MonoBehaviour
     {
         if (keyObtained && carObtained && bananaObtained && dogObtained && cigaretteObtained){
             
-            Invoke("LoadCasoResuelto",11)
+            Invoke("LoadCasoResuelto",11);
         }
 
 
@@ -126,7 +126,7 @@ public class FPSController : MonoBehaviour
                      }
                 }else{
                     txtBuscaCandado.SetActive(true);
-                    Invoke("hideBuscaCandado",2.5);
+                    Invoke("hideBuscaCandado",2.5f);
                 }
             }
 
