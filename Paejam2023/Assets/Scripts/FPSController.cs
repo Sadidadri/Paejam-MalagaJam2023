@@ -93,8 +93,8 @@ public class FPSController : MonoBehaviour
     void Update()
     {
         if (keyObtained && carObtained && bananaObtained && dogObtained && cigaretteObtained){
-            videoFinal.setActive(true);
-            Invoke("BackToMenu",33)
+            videoFinal.SetActive(true);
+            Invoke("BackToMenu",33);
         }
 
 
@@ -124,7 +124,7 @@ public class FPSController : MonoBehaviour
                      }
                 }else{
                     txtBuscaCandado.SetActive(true);
-                    Invoke("hideBuscaCandado",2.5);
+                    Invoke("hideBuscaCandado",2.5f);
                 }
             }
 
