@@ -54,6 +54,7 @@ public class FPSController : MonoBehaviour
     private bool doorOpened = false;
 
     public GameObject vid1, vid2, vid3, vid4;
+    public GameObject videoFinal;
 
      //Pausa
     private KeyCode escapeKey = KeyCode.Escape;
@@ -91,6 +92,13 @@ public class FPSController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (keyObtained && carObtained && bananaObtained && dogObtained && cigaretteObtained){
+            videoFinal.setActive(true);
+            Invoke("BackToMenu",33)
+        }
+
+
+
         //pause handle
          if (Input.GetKeyDown(escapeKey)){
             handlePause();
@@ -116,7 +124,7 @@ public class FPSController : MonoBehaviour
                      }
                 }else{
                     txtBuscaCandado.SetActive(true);
-                    Invoke("hideBuscaCandado",4);
+                    Invoke("hideBuscaCandado",2.5);
                 }
             }
 
@@ -289,6 +297,10 @@ public class FPSController : MonoBehaviour
 
     private void hideBuscaCandado(){
         txtBuscaCandado.SetActive(false);
+    }
+
+    private void BackToMenu(){
+        SceneManager.LoadScene("Menu");
     }
 
 
