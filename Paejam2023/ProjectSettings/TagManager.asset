@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Evento1
+  - PuertaValla
+  - ObjectoSeleccionable
   layers:
   - Default
   - TransparentFX

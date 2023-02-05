@@ -44,7 +44,9 @@ public class FPSController : MonoBehaviour
     //RayCast
     public float distanceToSee;
     RaycastHit whatIHit;
-    
+    //TextoBuscaPistas
+    public GameObject txtHints;
+    public Animator puertaAnim;
 
 
     public GameObject vid1, vid2, vid3, vid4;
@@ -53,6 +55,9 @@ public class FPSController : MonoBehaviour
     private KeyCode escapeKey = KeyCode.Escape;
     private bool isPaused = false;
     public GameObject pauseMenu;
+
+    //Objetos coleccionables
+    private bool keyObtained = true;
 
 
     // Start is called before the first frame update
@@ -65,7 +70,8 @@ public class FPSController : MonoBehaviour
         crouchingCenter = controller.center;
         standingCenter = crouchingCenter;
         txtInte.SetActive(false);
-        
+        txtHints.SetActive(true);
+        Invoke("hideHintsTxt",4);
         
     }
 
@@ -84,16 +90,33 @@ public class FPSController : MonoBehaviour
         //Raycasting
         Debug.DrawRay(cam.transform.position,cam.transform.forward * distanceToSee, Color.magenta);
         if (Physics.Raycast(cam.transform.position,cam.transform.forward,out whatIHit,distanceToSee)){
-            //Debug.Log("I touched "+whatIHit.collider.gameObject.tag);
-            if (whatIHit.collider.gameObject.tag == "Evento1"){
-                txtInte.SetActive(true);
-                if (Input.GetKey(KeyCode.E)){
-                Destroy(obj1);
-                txtInte.SetActive(false);
-                vid3.SetActive(true);
-                Invoke("desaparecerVideos",4);
+
+            if( whatIHit.collider.gameObject.tag == "PuertaValla"){
+                if(keyObtained){
+                    txtInte.SetActive(true);
+                     if (Input.GetKey(KeyCode.E)){
+                        //Destroy(whatIHit.transform.gameObject);
+                        Debug.Log("Abrir")
+                        puertaAnim.Play("AbrirPuerta");
+                        txtInte.SetActive(false);
+                     }
                 }
             }
+
+            if (whatIHit.collider.gameObject.tag == "ObjectoSeleccionable"){             
+             txtInte.SetActive(true);
+                if (Input.GetKey(KeyCode.E)){
+                Destroy(whatIHit.transform.gameObject);
+                txtInte.SetActive(false);
+                switch(whatIHit.transform.gameObject.name){
+                    case "llave":
+                        keyObtained = true;
+                        break;
+                }
+                //vid3.SetActive(true);
+                //Invoke("desaparecerVideos",4);
+                }
+         }
         }
 
         h_mouse = isPaused ? 0 : mouseHorizontal * Input.GetAxis("Mouse X");
@@ -198,6 +221,11 @@ public class FPSController : MonoBehaviour
         handlePause();
         SceneManager.LoadScene("Menu");
     }
+
+    private void hideHintsTxt(){
+        txtHints.SetActive(false);
+    }
+
 
 
     // void OnTriggerEnter(Collider col){
