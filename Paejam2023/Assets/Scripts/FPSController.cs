@@ -94,7 +94,7 @@ public class FPSController : MonoBehaviour
     {
         if (keyObtained && carObtained && bananaObtained && dogObtained && cigaretteObtained){
             videoFinal.setActive(true);
-            Invoke("BackToMenu",25)
+            Invoke("BackToMenu",33)
         }
 
 
