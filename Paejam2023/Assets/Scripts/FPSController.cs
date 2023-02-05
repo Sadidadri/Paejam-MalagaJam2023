@@ -48,6 +48,8 @@ public class FPSController : MonoBehaviour
     //TextoBuscaPistas
     public GameObject txtHints;
 
+     public GameObject txtCasoResuelto;
+
      public GameObject Puerta;
     public Animator puertaAnim;
 
@@ -93,8 +95,8 @@ public class FPSController : MonoBehaviour
     void Update()
     {
         if (keyObtained && carObtained && bananaObtained && dogObtained && cigaretteObtained){
-            videoFinal.setActive(true);
-            Invoke("BackToMenu",33)
+            
+            Invoke("LoadCasoResuelto",11)
         }
 
 
@@ -299,6 +301,17 @@ public class FPSController : MonoBehaviour
         txtBuscaCandado.SetActive(false);
     }
 
+
+    private void LoadCasoResuelto(){
+        txtCasoResuelto.setActive(true);
+        Invoke("LoadFinalVideo",3);
+    }
+
+    private void LoadFinalVideo(){
+        txtCasoResuelto.setActive(false);
+        videoFinal.setActive(true);
+        Invoke("BackToMenu",33);
+    }
     private void BackToMenu(){
         SceneManager.LoadScene("Menu");
     }
